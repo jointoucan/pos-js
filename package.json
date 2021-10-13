@@ -1,6 +1,6 @@
 {
-  "name": "pos",
-  "description": "fasttag part of speech tagger implementation",
+  "name": "@jointoucan/pos",
+  "description": "fasttag part of speech tagger implementation that decouples the lexicon",
   "keywords": [
     "nlp",
     "pos",
@@ -8,7 +8,7 @@
     "jspos",
     "fasttag"
   ],
-  "homepage": "https://github.com/dariusk/pos-js",
+  "homepage": "https://github.com/jointoucan/pos-js",
   "author": "Percy Wegmann",
   "contributors": [
     {
@@ -26,10 +26,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/dariusk/pos-js.git"
+    "url": "git://github.com/jointoucan/pos-js.git"
   },
   "bugs": {
-    "url": "https://github.com/dariusk/pos-js/issues"
+    "url": "https://github.com/jointoucan/pos-js/issues"
   },
   "engines": {
     "node": ">=0"
@@ -38,6 +38,7 @@
     "test": "mocha"
   },
   "main": "./index.js",
+  "types": "./main.d.ts",
   "devDependencies": {
     "mocha": "~2.1.0",
     "should": "~5.0.1"

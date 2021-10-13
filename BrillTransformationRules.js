@@ -16,7 +16,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Usage: 
+// Usage:
 // transformationRules = new BrillTransformationRules();
 // transformationRules.rules.forEach(function(ruleFunction) {
 //   ruleFunction(taggedSentence, i);
@@ -28,24 +28,24 @@ function BrillTransformationRules() {
   this.rules = [rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8];
 }
 
-BrillTransformationRules.prototype.getRule = function(index) {
-  return(this.rules[index]);
+BrillTransformationRules.prototype.getRule = function (index) {
+  return this.rules[index];
 };
 
-BrillTransformationRules.prototype.setRule = function(index, rule) {
+BrillTransformationRules.prototype.setRule = function (index, rule) {
   this.rules[index] = rule;
 };
 
-BrillTransformationRules.prototype.appendRule = function(rule) {
+BrillTransformationRules.prototype.appendRule = function (rule) {
   this.rules[this.rules.length] = rule;
 };
 
-BrillTransformationRules.prototype.setRules = function(newRules) {
+BrillTransformationRules.prototype.setRules = function (newRules) {
   this.rules = newRules;
 };
 
-BrillTransformationRules.prototype.getRules = function() {
-  return(this.rules);
+BrillTransformationRules.prototype.getRules = function () {
+  return this.rules;
 };
 
 /**
@@ -72,10 +72,12 @@ function endsWith($this, string) {
 
 //  rule 1: DT, {VBD | VBP} --> DT, NN
 function rule1(taggedSentence, index) {
-  if ((index > 0) && (taggedSentence[index - 1][1] === "DT")) {
-    if ((taggedSentence[index][1] === "VBD") ||
-      (taggedSentence[index][1] === "VBP") ||
-      (taggedSentence[index][1] === "VB")) {
+  if (index > 0 && taggedSentence[index - 1][1] === "DT") {
+    if (
+      taggedSentence[index][1] === "VBD" ||
+      taggedSentence[index][1] === "VBP" ||
+      taggedSentence[index][1] === "VB"
+    ) {
       taggedSentence[index][1] = "NN";
     }
   }
@@ -88,8 +90,7 @@ function rule2(taggedSentence, index) {
       // url if there are two contiguous alpha characters
       if (/[a-zA-Z]{2}/.test(taggedSentence[index][0])) {
         taggedSentence[index][1] = "URL";
-      }
-      else {
+      } else {
         taggedSentence[index][1] = "CD";
       }
     }
@@ -102,7 +103,10 @@ function rule2(taggedSentence, index) {
 
 // rule 3: convert a noun to a past participle if words[i] ends with "ed"
 function rule3(taggedSentence, index) {
-  if (startsWith(taggedSentence[index][1], "N") && endsWith(taggedSentence[index][0], "ed")) {
+  if (
+    startsWith(taggedSentence[index][1], "N") &&
+    endsWith(taggedSentence[index][0], "ed")
+  ) {
     taggedSentence[index][1] = "VBN";
   }
 }
@@ -116,14 +120,21 @@ function rule4(taggedSentence, index) {
 
 // rule 5: convert a common noun (NN or NNS) to a adjective if it ends with "al"
 function rule5(taggedSentence, index) {
-  if (startsWith(taggedSentence[index][1], "NN") && endsWith(taggedSentence[index][0], "al")) {
+  if (
+    startsWith(taggedSentence[index][1], "NN") &&
+    endsWith(taggedSentence[index][0], "al")
+  ) {
     taggedSentence[index][1] = "JJ";
   }
 }
 
 // rule 6: convert a noun to a verb if the preceding work is "would"
 function rule6(taggedSentence, index) {
-  if ((index > 0) && startsWith(taggedSentence[index][1], "NN") && (taggedSentence[index - 1][0].toLowerCase() === "would")) {
+  if (
+    index > 0 &&
+    startsWith(taggedSentence[index][1], "NN") &&
+    taggedSentence[index - 1][0].toLowerCase() === "would"
+  ) {
     taggedSentence[index][1] = "VB";
   }
 }
@@ -131,14 +142,20 @@ function rule6(taggedSentence, index) {
 // rule 7: if a word has been categorized as a common noun and it ends with "s",
 //         then set its type to plural common noun (NNS)
 function rule7(taggedSentence, index) {
-  if ((taggedSentence[index][1] === "NN") && (endsWith(taggedSentence[index][0], "s"))) {
+  if (
+    taggedSentence[index][1] === "NN" &&
+    endsWith(taggedSentence[index][0], "s")
+  ) {
     taggedSentence[index][1] = "NNS";
   }
 }
 
 // rule 8: convert a common noun to a present participle verb (i.e., a gerund)
 function rule8(taggedSentence, index) {
-  if (startsWith(taggedSentence[index][1], "NN") && endsWith(taggedSentence[index][0], "ing")) {
+  if (
+    startsWith(taggedSentence[index][1], "NN") &&
+    endsWith(taggedSentence[index][0], "ing")
+  ) {
     taggedSentence[index][1] = "VBG";
   }
 }
